@@ -162,8 +162,8 @@ function ScoreTracker(winner){
 
 // subtract a round in case of tie or mis-entry, display score.
 function RoundSubtraction(){
-round -= 1;
-DisplayScore();
+    round -= 1;
+    DisplayScore();
 }
 
 function DisplayScore(){
