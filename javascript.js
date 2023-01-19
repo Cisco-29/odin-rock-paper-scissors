@@ -47,7 +47,7 @@ function GetPlayerInput(){
     }else 
     {
         console.log("You're doing it wrong.")
-        RoundSubtraction()
+        SubtractFromRounds()
     }
 }
 
@@ -66,21 +66,21 @@ function GetComputerChoice(){
         case randomNumber == 3:
             console.log("Computer chose Rock!");
             computerChoice = randomNumber;
-            WinLogic();
+            RunWinLogic();
             break;
         case randomNumber == 4:
         case randomNumber == 5:
         case randomNumber == 6:
             console.log("Computer chose Paper!");
             computerChoice = randomNumber;
-            WinLogic();
+            RunWinLogic();
             break;     
         case randomNumber == 7:
         case randomNumber == 8:
         case randomNumber == 9:
             console.log("Computer chose Scissors!");
             computerChoice = randomNumber;
-            WinLogic();
+            RunWinLogic();
             break;    
         case randomNumber == 0:
             GetComputerChoice();
@@ -90,7 +90,7 @@ function GetComputerChoice(){
 
 }
 
-function WinLogic(computerSelection){
+function RunWinLogic(computerSelection){
     // set params
     // if player chose rock
         //if computer chose rock - draw
@@ -111,47 +111,47 @@ function WinLogic(computerSelection){
     if (playerChoice == "rock"){
         if (computerChoice == 1 || computerChoice == 2 || computerChoice == 3){
             console.log("It's a tie!")
-            RoundSubtraction()
+            SubtractFromRounds()
         }        
         if (computerChoice == 4 || computerChoice == 5 || computerChoice == 6){
             console.log("Suck it!")
-            ScoreTracker("ai");
+            UpdateScoreTracker("ai");
         }
         if (computerChoice == 7 || computerChoice == 8 || computerChoice == 9){
             console.log("You win! Good game!")
-            ScoreTracker("player");
+            UpdateScoreTracker("player");
         }    
     }else if (playerChoice == "paper"){
         if (computerChoice == 1 || computerChoice == 2 || computerChoice == 3){
             console.log("You win! Good game!")
-            ScoreTracker("player");
+            UpdateScoreTracker("player");
         }        
         if (computerChoice == 4 || computerChoice == 5 || computerChoice == 6){
             console.log("It's a tie!")
-            RoundSubtraction()
+            SubtractFromRounds()
         }
         if (computerChoice == 7 || computerChoice == 8 || computerChoice == 9){
             console.log("Suck it!")
-            ScoreTracker("ai");
+            UpdateScoreTracker("ai");
         }    
     }else if (playerChoice == "scissors"){
         if (computerChoice == 1 || computerChoice == 2 || computerChoice == 3){
             console.log("Suck it!")
-            ScoreTracker("ai");
+            UpdateScoreTracker("ai");
         }        
         if (computerChoice == 4 || computerChoice == 5 || computerChoice == 6){
             console.log("You win! Good game!")
-            ScoreTracker("player");
+            UpdateScoreTracker("player");
         }
         if (computerChoice == 7 || computerChoice == 8 || computerChoice == 9){
             console.log("It's a tie!")
-            RoundSubtraction()
+            SubtractFromRounds()
         }    
     }
 }
 
 // add to the winner's score, display score.
-function ScoreTracker(winner){
+function UpdateScoreTracker(winner){
     if (winner == "player"){
         ++playerScore;
     }else{
@@ -161,7 +161,7 @@ function ScoreTracker(winner){
 }
 
 // subtract a round in case of tie or mis-entry, display score.
-function RoundSubtraction(){
+function SubtractFromRounds(){
     round -= 1;
     DisplayScore();
 }
