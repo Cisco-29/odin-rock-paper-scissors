@@ -6,21 +6,24 @@ let playerScore = 0;
 let computerScore = 0;
 let round = 0;
 
-    for (round = 0; round <= 5; round++){
-        if (round <5)
-        {
-            StartGame();
-        }
-        else {
-            if (playerScore > computerScore){
-                console.log("YOU WIN!! Another match?")
-            }else{
-                console.log("YOU LOSE!! Another match?")
-            }
-            ResetScores();
-            round = 0;
-        }   
+// Start game loop on website load. 
+// It will play 5 rounds automatically (not counting ties or mis-inputs), then reset.
+
+for (round = 0; round <= 5; round++){
+    if (round <5)
+    {
+        StartGame();
     }
+    else {
+        if (playerScore > computerScore){
+            console.log("YOU WIN!! Another match?")
+        }else{
+            console.log("YOU LOSE!! Another match?")
+        }
+        ResetScores();
+        round = 0;
+    }   
+}
 
 function ResetScores(){
     playerScore = 0;
@@ -31,6 +34,9 @@ function StartGame(){
     GetPlayerInput();
 }
 
+// Prompt player to input rock paper or scissors.
+// convert their choice to lowercase for processing.
+// Continue only if the player chose a valid response, otherwise notify and minus a round.
 function GetPlayerInput(){
     playerInput = prompt("Rock, Paper, or Scissors?")
     playerChoice = playerInput.toLowerCase();
@@ -54,7 +60,6 @@ function GetComputerChoice(){
     // if number is 7-9, scissors
 
     let randomNumber = Math.floor(Math.random() * 10);
-    //console.log(randomNumber);
     switch (true){
         case randomNumber == 1:
         case randomNumber == 2:
@@ -99,6 +104,8 @@ function WinLogic(computerSelection){
         //if computer chose rock - player loses
         //if computer chose paper - player wins            
         //if computer chose scissors - draw
+
+    // depending on result, award points, or subtract a round.
         computerSelection = computerChoice;
 
     if (playerChoice == "rock"){
@@ -143,15 +150,22 @@ function WinLogic(computerSelection){
     }
 }
 
+// add to the winner's score, display score.
 function ScoreTracker(winner){
     if (winner == "player"){
         ++playerScore;
     }else{
         ++computerScore;
     }
-    console.log(`Current score: You: ${playerScore} AI: ${computerScore}`);
+    DisplayScore();
 }
 
+// subtract a round in case of tie or mis-entry, display score.
 function RoundSubtraction(){
 round -= 1;
+DisplayScore();
+}
+
+function DisplayScore(){
+    console.log(`Current score: You: ${playerScore} AI: ${computerScore}`);
 }
