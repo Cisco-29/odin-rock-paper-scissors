@@ -27,6 +27,13 @@ let round = 0;
 
 //StartGame();
 
+const rockButton = document.querySelector('#rockButton');
+rockButton.onclick = () => GetPlayerInput("rock");
+const paperButton = document.querySelector('#paperButton');
+paperButton.onclick = () => GetPlayerInput("paper");
+const scissorsButton = document.querySelector('#scissorsButton');
+scissorsButton.onclick = () => GetPlayerInput("scissors");
+
 function ResetScores(){
     playerScore = 0;
     computerScore = 0;
@@ -39,10 +46,10 @@ function StartGame(){
 // Prompt player to input rock paper or scissors.
 // convert their choice to lowercase for processing.
 // Continue only if the player chose a valid response, otherwise notify and minus a round.
-function GetPlayerInput(){
-    playerInput = prompt("Rock, Paper, or Scissors?")
-    playerChoice = playerInput.toLowerCase();
-
+function GetPlayerInput(clickInput){
+    //playerInput = prompt("Rock, Paper, or Scissors?")
+    //playerInput.toLowerCase();
+    playerChoice = clickInput;
     if(playerChoice == "rock" || playerChoice == "paper"|| playerChoice == "scissors"){
         console.log(`You chose ${playerChoice}!`)
         GetComputerChoice();
