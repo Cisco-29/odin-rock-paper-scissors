@@ -9,21 +9,23 @@ let round = 0;
 // Start game loop on website load. 
 // It will play 5 rounds automatically (not counting ties or mis-inputs), then reset.
 
-for (round = 0; round <= 5; round++){
-    if (round <5)
-    {
-        StartGame();
-    }
-    else {
-        if (playerScore > computerScore){
-            console.log("YOU WIN!! Another match?")
-        }else{
-            console.log("YOU LOSE!! Another match?")
-        }
-        ResetScores();
-        round = 0;
-    }   
-}
+// for (round = 0; round <= 5; round++){
+//     if (round <5)
+//     {
+//         StartGame();
+//     }
+//     else {
+//         if (playerScore > computerScore){
+//             console.log("YOU WIN!! Another match?")
+//         }else{
+//             console.log("YOU LOSE!! Another match?")
+//         }
+//         ResetScores();
+//         round = 0;
+//     }   
+// }
+
+//StartGame();
 
 function ResetScores(){
     playerScore = 0;
