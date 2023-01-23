@@ -5,6 +5,7 @@ let playerChoice;
 let playerScore = 0;
 let computerScore = 0;
 let round = 0;
+let toDisplay = [];
 
 // Start game loop on website load. 
 // It will play 5 rounds automatically (not counting ties or mis-inputs), then reset.
@@ -34,6 +35,25 @@ paperButton.onclick = () => GetPlayerInput("paper");
 const scissorsButton = document.querySelector('#scissorsButton');
 scissorsButton.onclick = () => GetPlayerInput("scissors");
 
+const display = document.getElementById("textDisplay");
+const displayContainer = document.getElementById("infobox");
+console.log(display + ", " + typeof display);
+
+function updateInfobox(string){
+    // remove old child id
+    let oldChild = document.getElementById("textDisplay")
+    if(oldChild != null){
+    displayContainer.removeChild(oldChild);
+    }
+    // create new child with id, set text.
+    const displayInfo = document.createElement("p");
+    displayInfo.id = "textDisplay";
+    displayInfo.textContent = string.join("\n");
+    console.log(displayInfo);
+    // display text on viewport
+    displayContainer.appendChild(displayInfo);
+}
+
 function ResetScores(){
     playerScore = 0;
     computerScore = 0;
@@ -43,15 +63,16 @@ function StartGame(){
     GetPlayerInput();
 }
 
+// Notes...
 // Prompt player to input rock paper or scissors.
 // convert their choice to lowercase for processing.
 // Continue only if the player chose a valid response, otherwise notify and minus a round.
 function GetPlayerInput(clickInput){
-    //playerInput = prompt("Rock, Paper, or Scissors?")
-    //playerInput.toLowerCase();
+    toDisplay.length = 0;
     playerChoice = clickInput;
     if(playerChoice == "rock" || playerChoice == "paper"|| playerChoice == "scissors"){
-        console.log(`You chose ${playerChoice}!`)
+        //console.log(`You chose ${playerChoice}!`)
+        toDisplay.push(`You chose ${playerChoice}!`);
         GetComputerChoice();
     }else 
     {
@@ -73,21 +94,24 @@ function GetComputerChoice(){
         case randomNumber == 1:
         case randomNumber == 2:
         case randomNumber == 3:
-            console.log("Computer chose Rock!");
+            //console.log("Computer chose Rock!");
+            toDisplay.push("Computer chose Rock!");
             computerChoice = randomNumber;
             RunWinLogic();
             break;
         case randomNumber == 4:
         case randomNumber == 5:
         case randomNumber == 6:
-            console.log("Computer chose Paper!");
+            //console.log("Computer chose Paper!");
+            toDisplay.push("Computer chose paper!");
             computerChoice = randomNumber;
             RunWinLogic();
             break;     
         case randomNumber == 7:
         case randomNumber == 8:
         case randomNumber == 9:
-            console.log("Computer chose Scissors!");
+            //console.log("Computer chose Scissors!");
+            toDisplay.push("Computer chose scissors!");
             computerChoice = randomNumber;
             RunWinLogic();
             break;    
@@ -119,44 +143,56 @@ function RunWinLogic(computerSelection){
 
     if (playerChoice == "rock"){
         if (computerChoice == 1 || computerChoice == 2 || computerChoice == 3){
-            console.log("It's a tie!")
+            //console.log("It's a tie!")
+            toDisplay.push("It's a tie!");
             SubtractFromRounds()
         }        
         if (computerChoice == 4 || computerChoice == 5 || computerChoice == 6){
-            console.log("Suck it!")
+            //console.log("Suck it!")
+            toDisplay.push("SUCK IT!");
+
             UpdateScoreTracker("ai");
         }
         if (computerChoice == 7 || computerChoice == 8 || computerChoice == 9){
-            console.log("You win! Good game!")
+            //console.log("You win! Good game!")
+            toDisplay.push("You win! Good game!");
             UpdateScoreTracker("player");
         }    
     }else if (playerChoice == "paper"){
         if (computerChoice == 1 || computerChoice == 2 || computerChoice == 3){
-            console.log("You win! Good game!")
+            //console.log("You win! Good game!")
+            toDisplay.push("You win! Good game!");
             UpdateScoreTracker("player");
         }        
         if (computerChoice == 4 || computerChoice == 5 || computerChoice == 6){
-            console.log("It's a tie!")
+            //console.log("It's a tie!")
+            toDisplay.push("It's a tie!");
             SubtractFromRounds()
         }
         if (computerChoice == 7 || computerChoice == 8 || computerChoice == 9){
-            console.log("Suck it!")
+            //console.log("Suck it!")
+            toDisplay.push("SUCK IT!");
             UpdateScoreTracker("ai");
         }    
     }else if (playerChoice == "scissors"){
         if (computerChoice == 1 || computerChoice == 2 || computerChoice == 3){
-            console.log("Suck it!")
+            //console.log("Suck it!")
+            toDisplay.push("SUCK IT!");
             UpdateScoreTracker("ai");
         }        
         if (computerChoice == 4 || computerChoice == 5 || computerChoice == 6){
-            console.log("You win! Good game!")
+            //console.log("You win! Good game!")
+            toDisplay.push("You win! Good game!");
             UpdateScoreTracker("player");
         }
         if (computerChoice == 7 || computerChoice == 8 || computerChoice == 9){
-            console.log("It's a tie!")
+            //console.log("It's a tie!")
+            toDisplay.push("It's a tie!");
             SubtractFromRounds()
         }    
     }
+
+    updateInfobox(toDisplay);
 }
 
 // add to the winner's score, display score.
